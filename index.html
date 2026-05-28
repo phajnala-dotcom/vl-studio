@@ -35,20 +35,6 @@
             <option value="Kai">Kai</option>
             <option value="Nofish">Nofish</option>
             <option value="Bella">Bella</option>
-            <option value="Jennifer">Jennifer</option>
-            <option value="Ryan">Ryan</option>
-            <option value="Katerina">Katerina</option>
-            <option value="Aiden">Aiden</option>
-            <option value="Bodega">Bodega</option>
-            <option value="Alek">Alek</option>
-            <option value="Dolce">Dolce</option>
-            <option value="Sohee">Sohee</option>
-            <option value="Ono Anna">Ono Anna</option>
-            <option value="Lenn">Lenn</option>
-            <option value="Sonrisa">Sonrisa</option>
-            <option value="Emilien">Emilien</option>
-            <option value="Andre">Andre</option>
-            <option value="Radio Gol">Radio Gol</option>
             <option value="Eldric Sage">Eldric Sage</option>
             <option value="Mia">Mia</option>
             <option value="Mochi">Mochi</option>
@@ -58,18 +44,10 @@
             <option value="Neil">Neil</option>
             <option value="Elias">Elias</option>
             <option value="Arthur">Arthur</option>
+            <option value="Nini">Nini</option>
+            <option value="Seren">Seren</option>
             <option value="Pip">Pip</option>
             <option value="Stella">Stella</option>
-            <option value="Li">Li</option>
-            <option value="Marcus">Marcus</option>
-            <option value="Roy">Roy</option>
-            <option value="Peter">Peter</option>
-            <option value="Eric">Eric</option>
-            <option value="Rocky">Rocky</option>
-            <option value="Kiki">Kiki</option>
-            <option value="Sunny">Sunny</option>
-            <option value="Jada">Jada</option>
-            <option value="Dylan">Dylan</option>
         </select>
 
         <textarea id="textInput" placeholder="Text na syntézu..."></textarea>
@@ -86,6 +64,33 @@
 </div>
 
 <script>
+    const SUPPORTED_VOICES = [
+        "Cherry",
+        "Serena",
+        "Ethan",
+        "Chelsie",
+        "Momo",
+        "Vivian",
+        "Moon",
+        "Maia",
+        "Kai",
+        "Nofish",
+        "Bella",
+        "Eldric Sage",
+        "Mia",
+        "Mochi",
+        "Bellona",
+        "Vincent",
+        "Bunny",
+        "Neil",
+        "Elias",
+        "Arthur",
+        "Nini",
+        "Seren",
+        "Pip",
+        "Stella"
+    ];
+
     const keyInput = document.getElementById('apiKeyInput');
     const debugBox = document.getElementById('debugBox');
     const audioElement = document.getElementById('audioElement');
@@ -107,6 +112,10 @@
         const voice = document.getElementById("voiceSelect").value;
         const text = document.getElementById("textInput").value.trim();
         const instruct = document.getElementById("instructInput").value.trim();
+
+        if (!SUPPORTED_VOICES.includes(voice)) {
+            return alert("Nepodporovaný hlas pre model qwen3-tts-instruct-flash.");
+        }
 
         debugBox.style.display = 'none';
         debugBox.textContent = '';
