@@ -171,11 +171,12 @@
 
             const contentType = response.headers.get("content-type") || "";
 
-            if (contentType.startsWith("audio/")) {
-                if (!response.ok) {
-                    throw new Error("API chyba: HTTP " + response.status);
-                }
+            if (!response.ok) {
+                const responseText = contentType.startsWith("audio/") ? "" : await response.text();
+                throw new Error(getApiErrorMessage(response.status, responseText));
+            }
 
+            if (contentType.startsWith("audio/")) {
                 const audioBlob = await response.blob();
                 setAudioFromBlob(audioBlob);
                 resultCard.style.display = "block";
@@ -184,10 +185,6 @@
             }
 
             const responseText = await response.text();
-
-            if (!response.ok) {
-                throw new Error(getApiErrorMessage(response.status, responseText));
-            }
 
             if (contentType.includes("application/json")) {
                 let parsed;
