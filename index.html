@@ -115,13 +115,14 @@
             };
 
             if (instructions) {
+                requestBody.parameters.optimize_instructions = true;
                 requestBody.parameters.instructions = instructions;
             }
 
             const response = await fetch("https://dashscope-intl.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation", {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${key}`,
+                    "Authorization": `******
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(requestBody)
